@@ -82,7 +82,7 @@ class DetailsTaskFragment : Fragment() {
         mockData.add(Comments(id = 3, sender = "Какой-то отправитель", comment = "Комментарий номер 112"))
         mockData.add(Comments(id = 3, sender = "Это я", comment = "Комментарий номер 1222"))
         mockData.add(Comments(id = 3, sender = "Это", comment = "Большой комментарий.........................."))
-        mockData.add(Comments(id = 3, sender = "Это кто-то", comment = "Комментарий номер 1222"))
+        mockData.add(Comments(id = 3, sender = "Это кто-то", comment = "Комментарий номер 122"))
         mockData.add(Comments(id = 3, sender = "Это кто-то", comment = "Комментарий номер"))
         mockData.add(Comments(id = 3, sender = "Какой-то отправитель", comment = "Комментарий номер 1222"))
         mockData.add(Comments(id = 3, sender = "Это я", comment = "Комментарий номер"))
