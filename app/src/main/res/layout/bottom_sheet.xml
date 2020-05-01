@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:behavior_peekHeight="53dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/task_comments"
+            android:textColor="@color/color_text_white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textNoComments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_comments"
+            android:gravity="center"
+            android:padding="40dp"
+            android:textSize="20sp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerCommentsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="@color/color_text_white" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="65dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:gravity="center"
+        android:weightSum="100"
+        android:layout_gravity="bottom"
+        android:background="@color/color_text_white"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editComment"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/cardview_light_background"
+            android:layout_marginStart="10dp"
+            android:hint="@string/hint_edit_comment"
+            android:textSize="20sp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/color_comment"
+            android:layout_weight="100"/>
+
+        <Button
+            android:id="@+id/sendComment"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="100"
+            android:background="@mipmap/send_comment" />
+
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_navigation"
+    android:label="Навигация пользователя"
+    app:startDestination="@id/taskListFragment">
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.easyprog.tasksapp.fragments.ProfileFragment"
+        android:label="Профиль"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editPersonalDataFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editAuthorizationDataFragment"
+            app:destination="@id/editAuthorizationDataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsTaskFragment"
+        android:name="com.easyprog.tasksapp.fragments.DetailsTaskFragment"
+        android:label="Название задачи..."
+        tools:layout="@layout/fragment_details_task">
+        <action
+            android:id="@+id/action_detailsTaskFragment_to_participantsFragment"
+            app:destination="@id/participantsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskListFragment"
+        android:name="com.easyprog.tasksapp.fragments.TaskListFragment"
+        android:label="Список задач"
+        tools:layout="@layout/fragment_task_list">
+        <action
+            android:id="@+id/action_taskListFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_detailsTaskFragment"
+            app:destination="@id/detailsTaskFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_createTaskFragment"
+            app:destination="@id/createTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/participantsFragment"
+        android:name="com.easyprog.tasksapp.fragments.ParticipantsFragment"
+        android:label="Участники"
+        tools:layout="@layout/fragment_participants" />
+    <fragment
+        android:id="@+id/createTaskFragment"
+        android:name="com.easyprog.tasksapp.fragments.CreateTaskFragment"
+        android:label="Создание задачи"
+        tools:layout="@layout/fragment_create_task" />
+    <fragment
+        android:id="@+id/editPersonalDataFragment"
+        android:name="com.easyprog.tasksapp.fragments.EditPersonalDataFragment"
+        android:label="Редактирование профиля"
+        tools:layout="@layout/fragment_edit_personal_data" />
+    <fragment
+        android:id="@+id/editAuthorizationDataFragment"
+        android:name="com.easyprog.tasksapp.fragments.ChangePasswordFragment"
+        android:label="Изменение пароля"
+        tools:layout="@layout/fragment_change_password" />
+</navigation>

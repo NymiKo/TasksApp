@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "718973972849",
+    "firebase_url": "https://flane-6676c.firebaseio.com",
+    "project_id": "flane-6676c",
+    "storage_bucket": "flane-6676c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:718973972849:android:ede145c4a9d347fd9546d0",
+        "android_client_info": {
+          "package_name": "com.easyprog.tasksapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "718973972849-hhq70eae5v301qqg2bgr3c68fimht96a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3fFa7FLd1DhXXeKJtIygCsqr-UltyH7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "718973972849-hhq70eae5v301qqg2bgr3c68fimht96a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

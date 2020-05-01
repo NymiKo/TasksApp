@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#488EFF</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#488EFF</color>
+    <color name="screen_login_background">#7FB4FF</color>
+    <color name="background_btn_login">#5F9CF5</color>
+    <color name="screen_registration_background">#7FB4FF</color>
+    <color name="blackout">#AABBBBBB</color>
+    <color name="background_nav_header">#5F9CF5</color>
+    <color name="background_welcome_screen">#5F9CF5</color>
+    <color name="welcome_screen_text">#FFFFFF</color>
+    <color name="nav_header_text">#FFFFFF</color>
+    <color name="text_name_task">#FFFFFF</color>
+    <color name="background_task">#C1C1C1</color>
+    <color name="color_text_white">#FFFFFF</color>
+    <color name="color_text_black">#000000</color>
+    <color name="color_comment">#000000</color>
+    <color name="background_comment">#B2CFFF</color>
+    <color name="background_btn_add_task">#5F9CF5</color>
+    <color name="btn_task_color_red">#E62929</color>
+    <color name="btn_task_color_green">#4AC619</color>
+    <color name="btn_task_color_yellow">#D1D729</color>
+    <color name="btn_task_color_orange">#FF6900</color>
+    <color name="btn_task_color_blue">#4255FF</color>
+    <color name="btn_task_color_purple">#8934FF</color>
+    <color name="text_task_info">#B1B1B1</color>
+</resources>

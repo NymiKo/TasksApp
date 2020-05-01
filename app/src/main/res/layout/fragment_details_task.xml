@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:foregroundGravity="clip_horizontal"
+    tools:context=".fragments.DetailsTaskFragment"
+    android:background="@color/color_text_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textTaskName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Название задачи:"
+            android:textSize="22sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+        <EditText
+            android:id="@+id/textEditTaskName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_marginStart="16dp"
+            android:textSize="20sp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/color_comment"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            android:text="Название задачи"
+            android:enabled="false"/>
+
+        <TextView
+            android:id="@+id/textTaskDescription"
+            android:text="@string/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/textEditTaskDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:inputType="textMultiLine"
+            android:text="Описание задачи..."
+            android:textColor="@color/color_comment"
+            android:textSize="20sp"
+            android:cursorVisible="false"
+            android:backgroundTint="@color/color_text_white"
+            android:enabled="false"/>
+
+        <TextView
+            android:id="@+id/textCompleteBeforeTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Завершить до: 15.04.2020"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/bottom_sheet"/>
+
+</android.support.design.widget.CoordinatorLayout>

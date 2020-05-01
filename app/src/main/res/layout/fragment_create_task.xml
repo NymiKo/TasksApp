@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.CreateTaskFragment"
+    android:background="@color/color_text_white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_marginBottom="90dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editNameTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:backgroundTint="@color/colorPrimary"
+                android:hint="Название задачи..."
+                android:inputType="textPersonName"
+                android:paddingStart="10dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="15dp"
+                android:textColor="@color/color_text_white"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/editDescriptionTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/color_text_white"
+                android:hint="Описание задачи..."
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/color_text_black"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@mipmap/palitr"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/color"
+                    android:textColor="@color/color_text_black"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"/>
+
+                <ImageView
+                    android:id="@+id/imageSelectedColor"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@color/colorPrimary"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp" />
+
+                <Button
+                    android:id="@+id/btnColorPicker"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:background="@mipmap/update"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_text_white"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@mipmap/calendar"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/end_date"
+                    android:textColor="@color/color_text_black"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"/>
+
+                <TextView
+                    android:id="@+id/textEndDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_date"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"/>
+
+                <Button
+                    android:id="@+id/btnDatePicker"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:background="@mipmap/update"
+                    android:textColor="@color/color_text_white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@mipmap/participant"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/participants"
+                    android:textColor="@color/color_text_black"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="9dp"/>
+
+                <TextView
+                    android:id="@+id/textNoParticipants"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_participants"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"/>
+
+                <Button
+                    android:id="@+id/btnAddFieldParticipant"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@mipmap/add_participant"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llAddParticipant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/editAddParticipant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="100"
+                    android:hint="@string/input_email_participant"
+                    android:inputType="textEmailAddress" />
+
+                <Button
+                    android:id="@+id/btnAddParticipant"
+                    android:layout_weight="100"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@mipmap/add_participant"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp" />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerAddedParticipants"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnAddTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/textBtnAddTask"
+        android:layout_gravity="bottom"
+        android:layout_margin="20dp"
+        android:background="@color/background_btn_add_task"
+        android:textColor="@color/color_text_white"/>
+
+</FrameLayout>
