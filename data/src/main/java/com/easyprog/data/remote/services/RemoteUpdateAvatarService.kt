@@ -6,7 +6,7 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
-interface UpdateAvatarService {
+interface RemoteUpdateAvatarService {
     @FormUrlEncoded
     @POST("update_avatar.php")
     fun updateAvatar(@Field("token") token: String,

@@ -6,7 +6,7 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
-interface EditPersonalDataService {
+interface RemoteEditPersonalDataService {
 
     @FormUrlEncoded
     @POST("edit_personal_data.php")

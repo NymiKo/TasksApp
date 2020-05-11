@@ -1,19 +1,16 @@
 package com.easyprog.tasksapp.fragments
 
 import android.app.AlertDialog
-import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import androidx.navigation.fragment.NavHostFragment
 import com.easyprog.domain.models.Comments
-import com.easyprog.domain.models.Tasks
 
 import com.easyprog.tasksapp.R
 import com.easyprog.tasksapp.adapters.CommentAdapter
 import kotlinx.android.synthetic.main.bottom_sheet.*
-import kotlinx.android.synthetic.main.fragment_details_task.*
 
 class DetailsTaskFragment : Fragment() {
 
@@ -21,7 +18,6 @@ class DetailsTaskFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activity?.title = "Название задачи"
     }
 
     override fun onCreateView(
@@ -77,17 +73,6 @@ class DetailsTaskFragment : Fragment() {
         mockData.add(Comments(id = 0, sender = "Какой-то отправитель", comment = "Комментарий номер 1"))
         mockData.add(Comments(id = 1, sender = "Какой-то отправитель 2", comment = "Комментарий номер 2"))
         mockData.add(Comments(id = 2, sender = "Кто-то", comment = "Бла-бла-бла-бла-бла-бла-бла-бла-бла-бла-бла-бла-бла-бла-="))
-        mockData.add(Comments(id = 3, sender = "Это я", comment = "Lol"))
-        mockData.add(Comments(id = 3, sender = "Это я", comment = "Комментарий номер 10"))
-        mockData.add(Comments(id = 3, sender = "Какой-то отправитель", comment = "Комментарий номер 112"))
-        mockData.add(Comments(id = 3, sender = "Это я", comment = "Комментарий номер 1222"))
-        mockData.add(Comments(id = 3, sender = "Это", comment = "Большой комментарий.........................."))
-        mockData.add(Comments(id = 3, sender = "Это кто-то", comment = "Комментарий номер 122"))
-        mockData.add(Comments(id = 3, sender = "Это кто-то", comment = "Комментарий номер"))
-        mockData.add(Comments(id = 3, sender = "Какой-то отправитель", comment = "Комментарий номер 1222"))
-        mockData.add(Comments(id = 3, sender = "Это я", comment = "Комментарий номер"))
-        mockData.add(Comments(id = 3, sender = "Какой-то отправитель", comment = "Комментарий номер"))
-        mockData.add(Comments(id = 3, sender = "Это я", comment = "Комментарий номер"))
 
 
         mAdapter.setComments(newComment = mockData)

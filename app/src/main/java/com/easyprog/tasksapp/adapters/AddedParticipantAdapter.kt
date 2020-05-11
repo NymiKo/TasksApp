@@ -13,11 +13,10 @@ import com.squareup.picasso.Picasso
 
 class AddedParticipantAdapter: RecyclerView.Adapter<AddedParticipantAdapter.ViewHolder>() {
 
-    private val mAddedParticipantsList: MutableList<AddedParticipants> = ArrayList()
+    val mAddedParticipantsList: MutableList<AddedParticipants> = ArrayList()
 
-    fun setParticipant(newParticipant: List<AddedParticipants>) {
-        mAddedParticipantsList.clear()
-        mAddedParticipantsList.addAll(newParticipant)
+    fun setParticipant(token: String, name: String, surname: String, avatar: String) {
+        mAddedParticipantsList.add(AddedParticipants(token = token, name = name, surname = surname, image = avatar))
 
         notifyDataSetChanged()
     }

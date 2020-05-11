@@ -2,6 +2,7 @@ package com.easyprog.data.storage.dao
 
 import android.arch.persistence.room.*
 import com.easyprog.data.storage.contract.RoomContract
+import com.easyprog.data.storage.model.TasksListEntity
 import com.easyprog.data.storage.model.UserProfileEntity
 
 @Dao

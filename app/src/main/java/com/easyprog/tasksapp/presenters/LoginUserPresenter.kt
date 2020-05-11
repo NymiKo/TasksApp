@@ -2,19 +2,25 @@ package com.easyprog.tasksapp.presenters
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.easyprog.domain.repositories.LoginUserRepository
 import com.easyprog.domain.repositories.implementations.LoginUserRepositoryImpl
+import com.easyprog.tasksapp.App
 import com.easyprog.tasksapp.R
-import com.easyprog.tasksapp.di.App
 import com.easyprog.tasksapp.view.LoginUserView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import javax.inject.Inject
 
 @InjectViewState
 class LoginUserPresenter: MvpPresenter<LoginUserView>() {
 
+    @Inject
+    lateinit var loginUserRepository: LoginUserRepository
+
     fun loginUser(login: String, password: String) {
+        App.appComponent.inject(presenter = this@LoginUserPresenter)
 
         if(!validateLoginData(login = login, password = password)) {
             viewState.invalidateLoginData(messageInvalidateLoginData = R.string.message_invalidate_login_data)
@@ -24,8 +30,7 @@ class LoginUserPresenter: MvpPresenter<LoginUserView>() {
         viewState.presentLoading()
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val loginUserAnswer = LoginUserRepositoryImpl(roomDatabase = App.roomDatabase)
-                    .LoginUserAsync(login = login, password = password).await()
+                val loginUserAnswer = loginUserRepository.LoginUserAsync(login = login, password = password).await()
 
                 checkAnswerServer(loginUserAnswer.answer, token = loginUserAnswer.token, login = login, password = password,
                     avatar = loginUserAnswer.avatar, name = loginUserAnswer.name, surname = loginUserAnswer.surname, email = loginUserAnswer.email)
@@ -56,7 +61,7 @@ class LoginUserPresenter: MvpPresenter<LoginUserView>() {
     private fun insertUserData(login: String, password: String, avatar: String, name: String, surname: String, email: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                LoginUserRepositoryImpl(roomDatabase = App.roomDatabase).InsertUserDataAsync(login = login, password = password,
+                loginUserRepository.InsertUserDataAsync(login = login, password = password,
                     avatar = avatar, name = name, surname = surname, email = email)
             } catch (e: Exception) {
                 e.printStackTrace()

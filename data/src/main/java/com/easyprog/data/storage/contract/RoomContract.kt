@@ -6,5 +6,6 @@ class RoomContract {
         const val databaseApp = "TaskApp.db"
 
         const val tableUserProfile = "UserProfile"
+        const val tableTasks = "Tasks"
     }
 }

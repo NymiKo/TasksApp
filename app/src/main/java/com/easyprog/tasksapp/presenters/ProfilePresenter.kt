@@ -4,30 +4,35 @@ import android.graphics.Bitmap
 import android.util.Base64
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.easyprog.domain.repositories.implementations.ChangePasswordRepositoryImpl
+import com.easyprog.domain.repositories.ProfileRepository
+import com.easyprog.domain.repositories.UpdateAvatarRepository
 import com.easyprog.domain.repositories.implementations.ProfileRepositoryImpl
 import com.easyprog.domain.repositories.implementations.UpdateAvatarRepositoryImpl
 import com.easyprog.tasksapp.R
-import com.easyprog.tasksapp.di.App
+import com.easyprog.tasksapp.App
 import com.easyprog.tasksapp.view.ProfileView
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
+import javax.inject.Inject
 import kotlin.Exception
 
 @InjectViewState
 class ProfilePresenter: MvpPresenter<ProfileView>() {
 
-    fun getUserProfile() {
-        val showUserProfileRepository = ProfileRepositoryImpl(roomDatabase = App.roomDatabase)
+    @Inject
+    lateinit var updateAvatarRepository: UpdateAvatarRepository
 
+    @Inject
+    lateinit var profileRepository: ProfileRepository
+
+    fun getUserProfile() {
+        App.appComponent.inject(presenter = this@ProfilePresenter)
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val profile = showUserProfileRepository.userProfileAsync()
+                val profile = profileRepository.userProfileAsync()
                 withContext(Dispatchers.Main) {
                     viewState.presentProfile(profile.avatar, profile.name, profile.surname, profile.email)
                 }
@@ -38,9 +43,10 @@ class ProfilePresenter: MvpPresenter<ProfileView>() {
     }
 
     fun updateAvatar(token: String, avatar: Bitmap?) {
+        App.appComponent.inject(presenter = this@ProfilePresenter)
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val updateAvatarAnswer = UpdateAvatarRepositoryImpl(roomDatabase = App.roomDatabase)
+                val updateAvatarAnswer = updateAvatarRepository
                     .updateAvatarAsync(token = token, avatar = imageToString(avatar = avatar)).await()
 
                 checkAnswerServer(answer = updateAvatarAnswer.answer)
@@ -65,7 +71,7 @@ class ProfilePresenter: MvpPresenter<ProfileView>() {
     private fun updateAvatarInLocalStorage(avatar: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                UpdateAvatarRepositoryImpl(roomDatabase = App.roomDatabase).updateAvatarInLocalStorage(avatar = avatar)
+                updateAvatarRepository.updateAvatarInLocalStorage(avatar = avatar)
                 withContext(Dispatchers.Main) {
                     viewState.updateAvatarInView(avatar = avatar)
                 }

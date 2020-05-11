@@ -6,7 +6,7 @@ import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface ChangePasswordService {
+interface RemoteChangePasswordService {
 
     @POST("change_password.php")
     fun changePassword(@Body requestBody: RequestBody): Deferred<ChangePasswordApi>

@@ -2,20 +2,25 @@ package com.easyprog.tasksapp.presenters
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.easyprog.domain.repositories.EditPersonalDataRepository
 import com.easyprog.domain.repositories.implementations.EditPersonalDataRepositoryImpl
-import com.easyprog.domain.repositories.implementations.ProfileRepositoryImpl
 import com.easyprog.tasksapp.R
-import com.easyprog.tasksapp.di.App
+import com.easyprog.tasksapp.App
 import com.easyprog.tasksapp.view.EditPersonalDataView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 @InjectViewState
 class EditPersonalDataPresenter: MvpPresenter<EditPersonalDataView>() {
 
+    @Inject
+    lateinit var editPersonalDataRepository: EditPersonalDataRepository
+
     fun editPersonalData(token: String, name: String, surname: String, email: String, login: String) {
+        App.appComponent.inject(presenter = this@EditPersonalDataPresenter)
 
         if(!validateEmail(email = email))
             viewState.invalidatePersonalDataEmail(messageInvalidatePersonalDataEmail = R.string.message_invalidate_email)
@@ -25,7 +30,7 @@ class EditPersonalDataPresenter: MvpPresenter<EditPersonalDataView>() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val editPersonalDataAnswer = EditPersonalDataRepositoryImpl(roomDatabase = App.roomDatabase)
+                val editPersonalDataAnswer = editPersonalDataRepository
                     .editPersonalDataAsync(token = token, name = name, surname = surname, email = email, login = login).await()
 
                 checkAnswerServer(answer = editPersonalDataAnswer.answer, name = name,
@@ -40,11 +45,10 @@ class EditPersonalDataPresenter: MvpPresenter<EditPersonalDataView>() {
     }
 
     fun getPersonalData() {
-        val getPersonalData = EditPersonalDataRepositoryImpl(roomDatabase = App.roomDatabase)
-
+        App.appComponent.inject(presenter = this@EditPersonalDataPresenter)
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val profile = getPersonalData.getPersonalData()
+                val profile = editPersonalDataRepository.getPersonalData()
                 withContext(Dispatchers.Main) {
                     viewState.presentProfile(profile.name, profile.surname, profile.email, profile.login)
                 }
@@ -71,8 +75,8 @@ class EditPersonalDataPresenter: MvpPresenter<EditPersonalDataView>() {
     private fun editPersonalDataLocaleStorage(name: String, surname: String, email: String, login: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                EditPersonalDataRepositoryImpl(roomDatabase = App.roomDatabase)
-                    .editPersonalDataLocalStorage(name = name, surname = surname, email = email, login = login)
+                editPersonalDataRepository.editPersonalDataLocalStorage(name = name,
+                    surname = surname, email = email, login = login)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

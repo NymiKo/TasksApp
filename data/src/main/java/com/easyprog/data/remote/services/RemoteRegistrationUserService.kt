@@ -6,7 +6,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
 
-interface RegistrationUserService {
+interface RemoteRegistrationUserService {
     @FormUrlEncoded
     @POST("register.php")
     fun registerUser(@Field("token") token: String,

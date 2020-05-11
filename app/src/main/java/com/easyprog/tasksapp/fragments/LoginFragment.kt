@@ -15,6 +15,9 @@ import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.easyprog.domain.repositories.LoginUserRepository
+import com.easyprog.tasksapp.App
 
 import com.easyprog.tasksapp.R
 import com.easyprog.tasksapp.activities.UserActivity
@@ -25,10 +28,18 @@ import kotlinx.android.synthetic.main.fragment_login.view.*
 
 class LoginFragment : MvpAppCompatFragment(), LoginUserView {
 
+//    @Inject
+//    lateinit var loginUserRepository: LoginUserRepository
+
     @InjectPresenter
     lateinit var loginUserPresenter: LoginUserPresenter
 
     lateinit var editor: SharedPreferences.Editor
+
+//    @ProvidePresenter
+//    fun provideLoginUserPresenter(): LoginUserPresenter {
+//        return LoginUserPresenter(loginUserRepository = loginUserRepository)
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

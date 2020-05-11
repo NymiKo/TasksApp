@@ -146,15 +146,6 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="9dp"/>
 
-                <TextView
-                    android:id="@+id/textNoParticipants"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no_participants"
-                    android:textSize="20sp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"/>
-
                 <Button
                     android:id="@+id/btnAddFieldParticipant"
                     android:layout_width="30dp"
@@ -174,16 +165,23 @@
                 android:weightSum="100"
                 android:visibility="gone">
 
-                <EditText
-                    android:id="@+id/editAddParticipant"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/editTextLayoutAddParticipant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    app:errorEnabled="true"
                     android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="100"
-                    android:hint="@string/input_email_participant"
-                    android:inputType="textEmailAddress" />
+                    android:layout_weight="100">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editTextAddParticipant"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:hint="@string/input_email_participant"
+                        android:lines="1"/>
+
+                </android.support.design.widget.TextInputLayout>
 
                 <Button
                     android:id="@+id/btnAddParticipant"
@@ -208,7 +206,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnAddTask"
+        android:id="@+id/btnCreateTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/textBtnAddTask"
@@ -216,5 +214,17 @@
         android:layout_margin="20dp"
         android:background="@color/background_btn_add_task"
         android:textColor="@color/color_text_white"/>
+
+    <FrameLayout
+        android:id="@+id/blackoutBackgroundCreateTask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blackout"
+        android:visibility="gone">
+        <ProgressBar
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center" />
+    </FrameLayout>
 
 </FrameLayout>

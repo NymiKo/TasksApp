@@ -38,7 +38,7 @@
     <string name="textBtnAddTask">Создать</string>
     <string name="color">Цвет:</string>
     <string name="participants">Участники:</string>
-    <string name="input_email_participant">Введите email участника...</string>
+    <string name="input_email_participant">Введите email участника…</string>
     <string name="download_avatar">Загрузить аватар</string>
     <string name="all_task">Всего задач</string>
     <string name="personal_task">Личные</string>
@@ -64,5 +64,9 @@
     <string name="end_date">Дата окончания:</string>
     <string name="no_date">Без даты</string>
     <string name="no_participants">Без участников</string>
+    <string name="error_message_add_participant">Пользователь не найден</string>
+    <string name="message_empty_email">Поле не заполнено</string>
+    <string name="success_message_create_task">Задача создана</string>
+    <string name="error_message_create_task">Ошибка. Задача не создана.</string>
 
 </resources>

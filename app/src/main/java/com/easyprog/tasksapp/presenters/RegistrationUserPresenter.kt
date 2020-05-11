@@ -6,6 +6,7 @@ import android.util.Base64
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.easyprog.domain.repositories.RegistrationUserRepository
 import com.easyprog.domain.repositories.implementations.RegistrationUserRepositoryImpl
 import com.easyprog.tasksapp.R
 import com.easyprog.tasksapp.view.RegistrationUserView
@@ -16,9 +17,13 @@ import kotlinx.coroutines.withContext
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.lang.Exception
+import javax.inject.Inject
 
 @InjectViewState
 class RegistrationUserPresenter: MvpPresenter<RegistrationUserView>() {
+
+    @Inject
+    lateinit var registrationUserRepository: RegistrationUserRepository
 
     fun registrationUser(
         token: String, login: String, password: String, image: Bitmap?, name: String,
@@ -42,7 +47,7 @@ class RegistrationUserPresenter: MvpPresenter<RegistrationUserView>() {
         viewState.presentLoading()
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val registrationUserAnswer = RegistrationUserRepositoryImpl()
+                val registrationUserAnswer = registrationUserRepository
                     .RegistrationUserAsync(token = token, login = login, password = password, avatar = imageToString(image = image),
                         name = name, surname = surname, email = email).await()
 

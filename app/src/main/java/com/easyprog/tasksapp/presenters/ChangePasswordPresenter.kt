@@ -2,18 +2,24 @@ package com.easyprog.tasksapp.presenters
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.easyprog.domain.repositories.ChangePasswordRepository
 import com.easyprog.domain.repositories.implementations.ChangePasswordRepositoryImpl
 import com.easyprog.tasksapp.R
-import com.easyprog.tasksapp.di.App
+import com.easyprog.tasksapp.App
 import com.easyprog.tasksapp.view.ChangePasswordView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @InjectViewState
 class ChangePasswordPresenter: MvpPresenter<ChangePasswordView>() {
 
+    @Inject
+    lateinit var changePasswordRepository: ChangePasswordRepository
+
     fun changePassword(token: String, oldPassword: String, newPassword: String) {
+        App.appComponent.inject(presenter = this@ChangePasswordPresenter)
 
         if(!validatePassword(oldPassword = oldPassword, newPassword = newPassword)) {
             viewState.changePasswordError(messageError = R.string.message_invalidate_other_data)
@@ -27,8 +33,8 @@ class ChangePasswordPresenter: MvpPresenter<ChangePasswordView>() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val changePasswordAnswer = ChangePasswordRepositoryImpl(roomDatabase = App.roomDatabase)
-                    .changePasswordAsync(token = token, oldPassword = oldPassword, newPassword = newPassword).await()
+                val changePasswordAnswer = changePasswordRepository.changePasswordAsync(token = token,
+                    oldPassword = oldPassword, newPassword = newPassword).await()
 
                 checkAnswerServer(answer = changePasswordAnswer.answer)
             } catch (e: Exception) {

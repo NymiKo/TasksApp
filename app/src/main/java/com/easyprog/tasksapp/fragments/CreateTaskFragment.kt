@@ -2,20 +2,25 @@ package com.easyprog.tasksapp.fragments
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.view.animation.RotateAnimation
+import android.widget.Toast
+import androidx.navigation.fragment.NavHostFragment
+import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
 import com.easyprog.domain.models.AddedParticipants
 import com.easyprog.domain.models.Tasks
 import com.easyprog.tasksapp.R
 import com.easyprog.tasksapp.adapters.AddedParticipantAdapter
+import com.easyprog.tasksapp.presenters.CreateTaskPresenter
+import com.easyprog.tasksapp.view.CreateTaskView
 import kotlinx.android.synthetic.main.fragment_create_task.*
 import yuku.ambilwarna.AmbilWarnaDialog
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener
@@ -24,9 +29,12 @@ import java.util.*
 /**
  * A simple [Fragment] subclass.
  */
-class CreateTaskFragment : Fragment() {
+class CreateTaskFragment : MvpAppCompatFragment(), CreateTaskView {
 
     private val TAG = CreateTaskFragment::class.java.simpleName
+
+    @InjectPresenter
+    lateinit var createTaskPresenter: CreateTaskPresenter
 
     var mAdapter = AddedParticipantAdapter()
     var defaultColor = 0
@@ -49,8 +57,28 @@ class CreateTaskFragment : Fragment() {
         btnDatePicker.setOnClickListener { openDatePicker() }
 
         btnAddFieldParticipant.setOnClickListener {
-            llAddParticipant.visibility = View.VISIBLE
-            btnAddFieldParticipant.visibility = View.GONE
+            if(llAddParticipant.visibility != View.VISIBLE) {
+                btnAddFieldParticipant.background = resources.getDrawable(R.mipmap.close_field_participant)
+                llAddParticipant.visibility = View.VISIBLE
+            } else {
+                btnAddFieldParticipant.background = resources.getDrawable(R.mipmap.add_participant)
+                llAddParticipant.visibility = View.GONE
+            }
+        }
+
+        btnAddParticipant.setOnClickListener {
+            createTaskPresenter.addedParticipant(email = editTextAddParticipant.text.toString())
+        }
+
+        btnCreateTask.setOnClickListener {
+            val sharedPreferences = activity?.getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
+            val token = sharedPreferences?.getString("token", null)
+
+            createTaskPresenter.createTask(
+                name = editNameTask.text.toString(), description = editDescriptionTask.text.toString(),
+            color = defaultColor.toString(), end_date = textEndDate.text.toString(), creator = token!!, type = mAdapter.itemCount,
+            participants = mAdapter.mAddedParticipantsList.map { it.token }.toMutableList()
+            )
         }
     }
 
@@ -58,7 +86,6 @@ class CreateTaskFragment : Fragment() {
         recyclerAddedParticipants.layoutManager = LinearLayoutManager(activity?.applicationContext,
             LinearLayoutManager.VERTICAL, false)
         recyclerAddedParticipants.adapter = mAdapter
-        fillComments()
     }
 
     private fun openColorPicker() {
@@ -87,15 +114,32 @@ class CreateTaskFragment : Fragment() {
         }, calendar[Calendar.YEAR], calendar[Calendar.MONTH], calendar[Calendar.DAY_OF_MONTH]).show()
     }
 
-    fun fillComments() {
-        val mockData = ArrayList<AddedParticipants>()
+    override fun addParticipant(token: String, name: String, surname: String, avatar: String) {
+        mAdapter.setParticipant(name = name, surname = surname, avatar = avatar, token = token)
+        editTextAddParticipant.text?.clear()
+        editTextLayoutAddParticipant.error = null
+    }
 
-        mockData.add(AddedParticipants(image = "no_avatar", name = "Имя1", surname = "Фамилия1"))
-        mockData.add(AddedParticipants(image = "https://i.pinimg.com/originals/1e/27/bc/1e27bc249c2429a93a52b4931a63c3ec.png", name = "Имя2", surname = "Фамилия2"))
-        mockData.add(AddedParticipants(image = "https://avatars.mds.yandex.net/get-zen_doc/1542444/pub_5cf638dde77f2e00b01c9f9d_5cf63a1e388e2100af05c7e3/scale_1200", name = "Имя3", surname = "Фамилия3"))
-        mockData.add(AddedParticipants(image = "no_avatar", name = "Имя4", surname = "Фамилия4"))
-        mockData.add(AddedParticipants(image = "https://art-assorty.ru/wp-content/uploads/2019/06/Кэрол-Денверс.jpg", name = "Имя5", surname = "Фамилия5"))
+    override fun errorAddParticipant(messageError: Int) {
+        Toast.makeText(activity, messageError, Toast.LENGTH_SHORT).show()
+        editTextLayoutAddParticipant.error = null
+    }
 
-        mAdapter.setParticipant(newParticipant = mockData)
+    override fun emptyEmail(messageError: Int) {
+        editTextLayoutAddParticipant.error = getString(messageError)
+    }
+
+    override fun presentLoading() {
+        blackoutBackgroundCreateTask.visibility = View.VISIBLE
+    }
+
+    override fun backTaskListScreen(messageSuccess: Int) {
+        val navController = NavHostFragment.findNavController(this)
+        navController.navigate(R.id.taskListFragment)
+        Toast.makeText(activity, messageSuccess, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun errorCreateTask(messageError: Int) {
+        Toast.makeText(activity, messageError, Toast.LENGTH_SHORT).show()
     }
 }
